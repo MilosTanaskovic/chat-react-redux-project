@@ -3,6 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import firebase from 'firebase';
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyBNj2T1nbUirDzDmDVnwYui1Oj8z3zA5tw",
+    authDomain: "chat-project-ece89.firebaseapp.com",
+    projectId: "chat-project-ece89",
+    storageBucket: "chat-project-ece89.appspot.com",
+    messagingSenderId: "232515004261",
+    appId: "1:232515004261:web:3789f4377ac9174e30238c",
+    measurementId: "G-TQTJWF2Y67"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
