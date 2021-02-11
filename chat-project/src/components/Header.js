@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 // import styling
 import './Header.css';
 /**
@@ -9,14 +10,19 @@ import './Header.css';
 **/
 
 const Header = (props) => {
+  const {authenticated, firstName, lastName} = useSelector(state => state.auth)
   return(
     <header className="header">
      <div style={{display: 'flex'}}>
       <div className="logo">Chat App</div>
-      <ul className="leftMenu">
-       <li><NavLink to={'/login'}>Login</NavLink></li>
-       <li><NavLink to={'/signup'}>Sign Up</NavLink></li>
-      </ul>
+      { !authenticated ?
+        <ul className="leftMenu">
+          <li><NavLink to={'/login'}>Login</NavLink></li>
+          <li><NavLink to={'/signup'}>Sign Up</NavLink></li>
+        </ul> 
+        : null
+      }
+      
      </div>
      <div style={
       {
@@ -25,10 +31,17 @@ const Header = (props) => {
        fontWeight: 'bold',
       }
      }>
-     Hi Milos
+    {
+      authenticated ? `Hi ${firstName} ${lastName}` : ''
+    }
      </div>
      <ul className="menu">
+     {
+      authenticated ? 
       <li><Link to={'#'}>Logout</Link></li>
+      : null
+     }
+      
      </ul>
     </header>
    )

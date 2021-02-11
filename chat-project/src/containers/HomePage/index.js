@@ -9,8 +9,8 @@ import Layout from '../../components/Layout';
 
 const HomePage = (props) => {
   return(
-    <Layout>
-     <div>HomePage</div>
+     <Layout>
+      <h1>Home page</h1>
     </Layout>
    )
   }
