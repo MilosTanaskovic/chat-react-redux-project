@@ -65,10 +65,9 @@ export const signup = (user) =>{
   })
  }
 }
-
+// signin
 export const signin = (user) => {
  const auth = firebase.auth();
- const firestore = firebase.firestore();
  return async dispatch => {
   dispatch({
    type: `${authConstant.USER_LOGIN}_REQUEST`
@@ -127,5 +126,35 @@ export const isLoggedInUser = () => {
     }
    })
   }
+ }
+}
+
+// logout
+export const logout = () => {
+ const auth = firebase.auth();
+ return async dispatch => {
+  dispatch({
+   type: `${authConstant.USER_LOGOUT}_REQUEST`,
+  });
+  // Now lets logout user
+  auth
+  .signOut()
+  .then(() => {
+   // successfully
+   localStorage.clear();
+   dispatch({
+    type: `${authConstant.USER_LOGOUT}_SUCCESS`,
+
+   })
+  })
+  .catch(error => {
+   console.log(error);
+   dispatch({
+    type: `${authConstant.USER_LOGOUT}_FAILURE`,
+    payload: {
+     error
+    }
+   })
+  })
  }
 }
