@@ -1,8 +1,11 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 // import components
 import Layout from '../../components/Layout';
 import ChatArea from './ChatArea';
 import ListOfUsers from './ListOfUsers';
+
+import {useDispatch, useSelector} from 'react-redux';
+import { getRealTimeUsers }  from "../../actions";
 // styling
 import './style.css';
 /**
@@ -12,11 +15,22 @@ import './style.css';
 **/
 
 const HomePage = (props) => {
+
+  const dispatch = useDispatch();
+  const { uid } = useSelector(state => state.auth)
+  const { users } = useSelector(state => state.user);
+
+  useEffect(() => {
+   dispatch(getRealTimeUsers(uid))
+  }, []);
+  console.log(users);
   return(
      <Layout>
       <section className="container">
         {/** List Of Users */}
-        <ListOfUsers/>      
+        <ListOfUsers 
+          users={users}
+        />      
         {/** Chat Area */}
         <ChatArea/>
     </section>

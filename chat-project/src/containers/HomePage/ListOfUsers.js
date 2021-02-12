@@ -8,27 +8,36 @@ import './ListOfUsers.css';
 **/
 
 const ListOfUsers = (props) => {
+  const {users} = props;
   return(
     <div className="listOfUsers">
-     <div className="displayName">
-      <div className="displayPic">
-       <img src="https://pbs.twimg.com/profile_images/1225057323623895041/L0bp83yj_400x400.jpg" alt="" />
-      </div>
-      <div style={
-       {
-        display: 'flex',
-        flex: 1,
-        justifyContent: 'space-between',
-        margin: '0 10px',
+    {
+      users.length > 0 ?
+      users.map((user) => {
+        return (
+          <div key={user.uid} className="displayName">
+            <div className="displayPic">
+            <img src="https://pbs.twimg.com/profile_images/1225057323623895041/L0bp83yj_400x400.jpg" alt="" />
+            </div>
+            <div style={
+            {
+              display: 'flex',
+              flex: 1,
+              justifyContent: 'space-between',
+              margin: '0 10px',
 
-       }
-      }>
-       <span style={{fontWeight: 500}}>
-        Milos Tanaskovic
-       </span>
-       <span>online</span>
-      </div>
-     </div>             
+            }
+            }>
+            <span style={{fontWeight: 500}}>
+              {user.firstName} {user.lastName}
+            </span>
+            <span>{user.isOnline ? 'online' : 'offline'}</span>
+            </div>
+          </div>   
+        );
+      }) : null
+    }
+               
     </div>
    )
   }

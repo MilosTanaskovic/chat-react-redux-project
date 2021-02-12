@@ -1,7 +1,7 @@
 import {authConstant} from '../actions/constants';
 
 const initState = {
- firsName: '',
+ firstName: '',
  lastName: '',
  email: '',
  authenticating: false,

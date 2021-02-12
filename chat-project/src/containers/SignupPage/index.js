@@ -2,7 +2,8 @@ import React, {useState} from 'react'
 import CardUI from '../../components/CardUI'
 import Layout from '../../components/Layout'
 import { signup } from '../../actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 /**
 * @author Milos Tanaskoic - ReactDancing ⚛️🚀
 * @like https://www.linkedin.com/groups/8792312/
@@ -17,6 +18,7 @@ const SignupPage = (props) => {
 
   // Dispatch
   const dispatch = useDispatch();
+  const { authenticated } = useSelector(state => state.auth)
   // signup User
   const signupUser = (e) => {
     e.preventDefault();
@@ -28,7 +30,10 @@ const SignupPage = (props) => {
     }
     dispatch(signup(user));
   }
- 
+  if(authenticated){
+    return <Redirect to={`/`}/>
+  }
+
   return(
    <Layout>
     <div className="registerContainer">

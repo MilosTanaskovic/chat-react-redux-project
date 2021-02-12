@@ -8,7 +8,7 @@ import SignupPage from './containers/SignupPage';
 import PrivateRoute from './components/PrivateRoute';
 // import actions
 import { isLoggedInUser } from './actions';
-import './App.scss';
+import './App.css';
 
 
 function App() {

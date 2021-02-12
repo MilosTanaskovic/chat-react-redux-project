@@ -11,12 +11,12 @@ import './Header.css';
 **/
 
 const Header = (props) => {
-  const {authenticated, firstName, lastName} = useSelector(state => state.auth)
+  const {authenticated, firstName, lastName, uid} = useSelector(state => state.auth)
   const dispatch = useDispatch();
   // logout
-const handleLogout = () => {
-  dispatch(logout());
-}
+  const handleLogout = () => {
+    dispatch(logout(uid));
+  }
   return(
     <header className="header">
      <div style={{display: 'flex'}}>
