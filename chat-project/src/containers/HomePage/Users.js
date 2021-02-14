@@ -1,6 +1,6 @@
 import React from 'react';
 // styling
-import './ListOfUsers.css';
+import './Users.css';
 /**
 * @author Milos Tanaskoic - ReactDancing ⚛️🚀
 * @see https://www.linkedin.com/groups/8792312/s
@@ -8,14 +8,14 @@ import './ListOfUsers.css';
 **/
 
 const ListOfUsers = (props) => {
-  const {users} = props;
+  const {users, onClick} = props;
   return(
     <div className="listOfUsers">
     {
       users.length > 0 ?
       users.map((user) => {
         return (
-          <div key={user.uid} className="displayName">
+          <div key={user.uid} onClick={() => onClick(user)} className="displayName">
             <div className="displayPic">
             <img src="https://pbs.twimg.com/profile_images/1225057323623895041/L0bp83yj_400x400.jpg" alt="" />
             </div>

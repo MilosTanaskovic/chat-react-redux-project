@@ -13,8 +13,8 @@ export const getRealTimeUsers = (uid) => {
   });
 
   const db = firestore;
+  const unsubscribe = db.collection("users")
   // Listen to multiple documents in a commection
-  db.collection("users")
   //.where("uid", "!=", uid)
    .onSnapshot((querySnapshot) => {
       const users = [];
@@ -32,7 +32,7 @@ export const getRealTimeUsers = (uid) => {
        }
       })
    });
-   
 
+   return unsubscribe;
  }
 }

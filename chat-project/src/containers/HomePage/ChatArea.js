@@ -8,20 +8,29 @@ import './ChatArea.css';
 **/
 
 const ChatArea = (props) => {
+  const { users, chatStarted, chatUser} = props;
   return(
    <div className="chatArea">
-     <div className="chatHeader"> Milos Tanaskovic </div>
+     <div className="chatHeader"> 
+      {
+        chatStarted ? chatUser : ''
+      }
+     </div>
      <div className="messageSections">
-
+      {
+        chatStarted ?
          <div style={{ textAlign: 'left' }}>
              <p className="messageStyle" >Hello User</p>
-         </div>
-
+         </div> : null
+      }
      </div>
-     <div className="chatControls">
+      {
+        chatStarted ?
+        <div className="chatControls">
          <textarea />
          <button>Send</button>
-     </div>
+        </div> : null
+      }
    </div>
    )
   }
