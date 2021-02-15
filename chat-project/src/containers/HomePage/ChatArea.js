@@ -8,7 +8,7 @@ import './ChatArea.css';
 **/
 
 const ChatArea = (props) => {
-  const { users, chatStarted, chatUser} = props;
+  const { chatStarted, chatUser, message, setMessage, submitMessage} = props;
   return(
    <div className="chatArea">
      <div className="chatHeader"> 
@@ -27,8 +27,12 @@ const ChatArea = (props) => {
       {
         chatStarted ?
         <div className="chatControls">
-         <textarea />
-         <button>Send</button>
+         <textarea 
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Write message, please!"
+         />
+         <button onClick={submitMessage}>Send</button>
         </div> : null
       }
    </div>

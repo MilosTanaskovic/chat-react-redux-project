@@ -5,7 +5,7 @@ import ChatArea from './ChatArea';
 import Users from './Users';
 
 import {useDispatch, useSelector} from 'react-redux';
-import { getRealTimeUsers }  from "../../actions";
+import { getRealTimeUsers, updateMessage }  from "../../actions";
 // styling
 import './style.css';
 /**
@@ -18,14 +18,16 @@ const HomePage = () => {
 
   const [chatStarted, setChatStarted] = useState(false);
   const [chatUser, setChatUser] = useState("");
+  const [message, setMessage] = useState('');
+  const [userUID, setUserUID] = useState(null);
 
   const dispatch = useDispatch();
-  const { uid } = useSelector(state => state.auth)
-  const { users } = useSelector(state => state.user);
+  const auth = useSelector(state => state.auth)
+  const user = useSelector(state => state.user);
   let unsubscribe;
 
   useEffect(() => {
-   unsubscribe = dispatch(getRealTimeUsers(uid))
+   unsubscribe = dispatch(getRealTimeUsers(auth.uid))
    .then(unsubscribe => {
      return unsubscribe;
    })
@@ -33,7 +35,6 @@ const HomePage = () => {
      console.log(error);
    })
   }, []);
-  console.log(users);
   // component will unmount
   useEffect(() => {
     return () => {
@@ -46,7 +47,22 @@ const HomePage = () => {
   const initChat = (user) => {
     setChatStarted(true);
     setChatUser(`${user.firstName} ${user.lastName}`);
+    setUserUID(user.uid);
     console.log(user);
+  }
+  // submit Message
+  const submitMessage = (e) => {
+
+    const msgObj = {
+      user_uid_1: auth.uid,
+      user_uid_2: userUID,
+      message
+    }
+
+    if(message !== ""){
+      dispatch(updateMessage(msgObj));
+    }
+    //console.log(msgObj);
   }
 
   return(
@@ -55,13 +71,16 @@ const HomePage = () => {
         {/** List Of Users */}
         <Users 
           onClick={initChat}
-          users={users}
+          user={user}
         />      
         {/** Chat Area */}
         <ChatArea
-          users={users}
+          user={user}
           chatStarted={chatStarted}
           chatUser={chatUser}
+          message={message}
+          setMessage={setMessage}
+          submitMessage={submitMessage}
         />
     </section>
     </Layout>

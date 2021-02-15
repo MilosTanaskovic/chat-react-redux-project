@@ -26,13 +26,7 @@ const LoginPage = (props) => {
      dispatch(isLoggedInUser());
    }
   }, [])
-  // onChange
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  }
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-  }
+  
   //user Login
   const userLogin = (e) => {
     e.preventDefault();
@@ -67,7 +61,7 @@ const LoginPage = (props) => {
           type="text" 
           name="email"
           value={email}
-          onChange={handleEmail}
+          onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
         />
         {/** Password */}
@@ -75,7 +69,7 @@ const LoginPage = (props) => {
           type="password" 
           name="password"
           value={password}
-          onChange={handlePassword}
+          onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
         {/** Login */}

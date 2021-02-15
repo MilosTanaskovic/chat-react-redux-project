@@ -8,12 +8,12 @@ import './Users.css';
 **/
 
 const ListOfUsers = (props) => {
-  const {users, onClick} = props;
+  const {user, onClick} = props;
   return(
     <div className="listOfUsers">
     {
-      users.length > 0 ?
-      users.map((user) => {
+      user.users.length > 0 ?
+      user.users.map((user) => {
         return (
           <div key={user.uid} onClick={() => onClick(user)} className="displayName">
             <div className="displayPic">
@@ -31,7 +31,9 @@ const ListOfUsers = (props) => {
             <span style={{fontWeight: 500}}>
               {user.firstName} {user.lastName}
             </span>
-            <span>{user.isOnline ? 'online' : 'offline'}</span>
+            <span className={
+              user.isOnline ? `onlineStatus` : `onlineStatus off`
+            }></span>
             </div>
           </div>   
         );

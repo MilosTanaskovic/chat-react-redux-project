@@ -4,7 +4,6 @@ import "firebase/auth";
 import "firebase/firestore";
 
 export const getRealTimeUsers = (uid) => {
- const auth = firebase.auth();
  const firestore = firebase.firestore();
 
  return async (dispatch) => {
@@ -35,4 +34,25 @@ export const getRealTimeUsers = (uid) => {
 
    return unsubscribe;
  }
+}
+
+export const updateMessage = (msgObj) => {
+  const firestore = firebase.firestore();
+
+  return async dispatch => {
+
+    const db = firestore;
+    db.collection('conversations')
+    .add({
+      ...msgObj,
+      isView: false,
+      createdAt: new Date(),
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
 }

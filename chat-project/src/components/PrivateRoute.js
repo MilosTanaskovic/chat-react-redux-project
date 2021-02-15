@@ -7,7 +7,7 @@ import { Redirect, Route } from 'react-router-dom';
 **/
 
 const PrivateRoute = (props) => {
-  const { component: Component, ...rest } = props
+  const { component: Component, ...rest } = props;
   return(
     <Route {...rest} component={(props) => {
       const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;

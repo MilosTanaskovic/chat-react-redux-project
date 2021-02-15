@@ -21,8 +21,9 @@ import store from './store';
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
-  // setup redux
+  // setup redux for testing on browser
   window.store = store;
+  
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>   
